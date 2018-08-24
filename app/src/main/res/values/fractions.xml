@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <fraction name="detail_body_line_spacing_multiplier">0.2</fraction>
+</resources>
