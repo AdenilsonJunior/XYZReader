@@ -4,4 +4,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_size_body">13sp</dimen>
     <dimen name="body_margin">16dp</dimen>
+    <dimen name="card_view_margin">88dp</dimen>
+    <dimen name="margin_top_nested_scroll">-140dp</dimen>
 </resources>
