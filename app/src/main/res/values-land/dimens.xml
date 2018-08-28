@@ -6,4 +6,8 @@
     <dimen name="body_margin">16dp</dimen>
     <dimen name="card_view_margin">88dp</dimen>
     <dimen name="margin_top_nested_scroll">-140dp</dimen>
+    <dimen name="space_item_decoration">16dp</dimen>
+    <dimen name="size_article_title">22sp</dimen>
+    <dimen name="size_article_subtitle">14sp</dimen>
+    <dimen name="padding_bottom_frame">16dp</dimen>
 </resources>

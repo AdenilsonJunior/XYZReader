@@ -68,12 +68,12 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="16dp">
+                android:paddingBottom="@dimen/padding_bottom_frame">
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/card_view_margin"
                     android:layout_marginLeft="@dimen/card_view_margin"
                     android:layout_marginRight="@dimen/card_view_margin"
                     android:clickable="true"
@@ -103,13 +103,14 @@
                                 android:fontFamily="sans-serif-medium"
                                 android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
                                 android:textColor="@color/white"
-                                android:textSize="22sp"
+                                android:textSize="@dimen/size_article_title"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/text_view_info"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="@dimen/size_article_subtitle"
                                 android:fontFamily="sans-serif-condensed"
                                 android:textColor="@color/white" />
                         </LinearLayout>

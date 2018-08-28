@@ -9,10 +9,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.RemoteException;
+import android.support.design.widget.Snackbar;
 import android.text.format.Time;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.adenilson.xyzreader.remote.RemoteEndpointUtil;
+import com.adenilson.xyzreader.util.ConnectionUtil;
+import com.example.xyzreader.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,15 +40,14 @@ public class UpdaterService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Time time = new Time();
 
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null || !ni.isConnected()) {
-            //// TODO: 7/11/16 :: add SnakeBar  
-            Log.w(TAG, "Not online, not refreshing.");
+        if(!ConnectionUtil.isOnline(this)){
+            Toast.makeText(this, R.string.offline_string, Toast.LENGTH_SHORT).show();
+            sendBroadcast(
+                    new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
             return;
         }
 
-        sendStickyBroadcast(
+        sendBroadcast(
                 new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
 
         // Don't even inspect the intent, we only do one thing, and that's fetch content.
@@ -82,7 +85,7 @@ public class UpdaterService extends IntentService {
             Log.e(TAG, "Error updating content.", e);
         }
 
-        sendStickyBroadcast(
+        sendBroadcast(
                 new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
     }
 }

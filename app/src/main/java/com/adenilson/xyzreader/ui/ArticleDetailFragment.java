@@ -175,7 +175,11 @@ public class ArticleDetailFragment extends Fragment implements
                             + " by <font color='#ffffff'>"
                             + mCursor.getString(ArticleLoader.Query.AUTHOR)
                             + "</font>"));
-            mTextViewBody.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
+            if(getResources().getBoolean(R.bool.is_tablet)){
+                mTextViewBody.setText(Html.fromHtml("<big>" + mCursor.getString(ArticleLoader.Query.BODY) + "</big>"));
+            }else{
+                mTextViewBody.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
+            }
             if (mToolbar != null) {
                 ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
                 mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.adenilson.xyzreader.data.ArticleLoader;
 import com.adenilson.xyzreader.data.UpdaterService;
 import com.adenilson.xyzreader.decoration.GridSpaceItemDecoration;
+import com.adenilson.xyzreader.util.ConnectionUtil;
 import com.adenilson.xyzreader.util.DimensUtil;
 import com.example.xyzreader.R;
 
@@ -64,7 +65,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
         GridLayoutManager staggeredGridLayoutManager =
                 new GridLayoutManager(this, columnCount);
         mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(columnCount, DimensUtil.dpToPx(this, 16), true));
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(columnCount, (int)getResources().getDimension(R.dimen.space_item_decoration), true));
         adapter = new ArticleAdapter(null, this);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
@@ -132,10 +133,18 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
 
     @Override
     public void onRefresh() {
-        startService(new Intent(this, UpdaterService.class));
-        Snackbar make = Snackbar.make(mCoordinatorLayout, R.string.refreshed_string, Snackbar.LENGTH_LONG);
-        View view = make.getView();
-        ((TextView)view.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        make.show();
+        if(ConnectionUtil.isOnline(this)) {
+            startService(new Intent(this, UpdaterService.class));
+            Snackbar make = Snackbar.make(mCoordinatorLayout, R.string.refreshed_string, Snackbar.LENGTH_LONG);
+            View view = make.getView();
+            ((TextView) view.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            make.show();
+        }else{
+            mSwipeRefreshLayout.setRefreshing(false);
+            Snackbar make = Snackbar.make(mCoordinatorLayout, R.string.offline_string, Snackbar.LENGTH_LONG);
+            View view = make.getView();
+            ((TextView) view.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            make.show();
+        }
     }
 }

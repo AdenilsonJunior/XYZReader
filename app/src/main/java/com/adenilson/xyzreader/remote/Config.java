@@ -1,5 +1,7 @@
 package com.adenilson.xyzreader.remote;
 
+import android.util.Log;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -11,7 +13,7 @@ public class Config {
         try {
             url = new URL("https://nspf.github.io/XYZReader/data.json" );
         } catch (MalformedURLException ignored) {
-            // TODO: throw a real error
+            Log.e(Config.class.getSimpleName(), ignored.getMessage());
         }
 
         BASE_URL = url;

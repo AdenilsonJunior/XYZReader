@@ -57,13 +57,14 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
+                        android:textSize="@dimen/size_article_title"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/text_view_info"
                         android:fontFamily="sans-serif-condensed"
                         android:layout_width="wrap_content"
+                        android:textSize="@dimen/size_article_subtitle"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white" />
                 </LinearLayout>
@@ -91,7 +92,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:paddingBottom="16dp"
+            android:paddingBottom="@dimen/padding_bottom_frame"
             android:layout_height="match_parent">
 
         <android.support.v7.widget.CardView
