@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:transitionName="@string/shared_transition" />
+                    android:contentDescription="@string/cd_article_photo"/>
 
                 <LinearLayout
                     android:id="@+id/background_bar"
@@ -103,7 +103,7 @@
             android:focusable="true"
             android:layout_marginBottom="16dp"
             android:padding="@dimen/card_padding"
-            app:cardElevation="@dimen/cardview_default_elevation">
+            app:cardElevation="@dimen/card_elevation_default">
 
             <TextView
                 android:id="@+id/text_view_body"

@@ -19,4 +19,5 @@
     <dimen name="size_article_title">22sp</dimen>
     <dimen name="size_article_subtitle">14sp</dimen>
     <dimen name="padding_bottom_frame">16dp</dimen>
+    <dimen name="card_elevation_default">2dp</dimen>
 </resources>

@@ -1,8 +1,6 @@
 package com.adenilson.xyzreader.ui;
 
 import android.database.Cursor;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +10,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Explode;
 import android.view.ViewGroup;
 
 import com.adenilson.xyzreader.data.ArticleLoader;
@@ -39,7 +36,7 @@ public class ArticleDetailActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_detail);
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         ButterKnife.bind(this);
 
         getSupportLoaderManager().initLoader(0, null, this);
@@ -121,5 +118,9 @@ public class ArticleDetailActivity extends AppCompatActivity
         }
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slid_in_left, R.anim.slid_out_right);
+    }
 }

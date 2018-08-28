@@ -81,9 +81,7 @@ public class SelectionBuilder {
         mSelection.append("(").append(selection).append(")");
         if (selectionArgs != null) {
         	ensureSelectionArgs();
-            for (String arg : selectionArgs) {
-                mSelectionArgs.add(arg);
-            }
+            mSelectionArgs.addAll(Arrays.asList(selectionArgs));
         }
 
         return this;

@@ -37,6 +37,7 @@
 
                     <ImageView
                         android:id="@+id/image_view_photo"
+                        android:contentDescription="@string/cd_article_photo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
@@ -63,7 +64,8 @@
             android:layout_marginTop="@dimen/margin_top_nested_scroll"
             android:fitsSystemWindows="true"
             android:forceHasOverlappingRendering="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:targetApi="n">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -79,7 +81,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="@dimen/card_padding"
-                    app:cardElevation="@dimen/cardview_default_elevation">
+                    app:cardElevation="@dimen/card_elevation_default">
 
                     <LinearLayout
                         android:orientation="vertical"
