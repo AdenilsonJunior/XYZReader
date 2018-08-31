@@ -9,6 +9,7 @@
         android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_size"
+        app:elevation="@dimen/elevation_app_bar"
         android:gravity="bottom"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 

@@ -15,4 +15,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_size_body">13sp</dimen>
     <dimen name="body_margin">16dp</dimen>
+    <dimen name="elevation_app_bar">4dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
 </resources>
