@@ -1,13 +1,10 @@
 package com.adenilson.xyzreader.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -30,27 +27,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ArticleAdapter extends CursorRecyclerViewAdapter<ArticleAdapter.ViewHolder> {
-    private Context mContext;
 
-    public ArticleAdapter(Cursor cursor, Context context) {
+    public ArticleAdapter(Cursor cursor) {
         super(cursor);
-        mContext = context;
     }
 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final Cursor cursor) {
         final Context context = holder.itemView.getContext();
-        Cursor mCursor = cursor;
-        holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
-        String thumb = mCursor.getString(ArticleLoader.Query.THUMB_URL);
-        holder.subtitleView.setText(
-                DateUtils.getRelativeTimeSpanString(
-                        mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
-                        System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
-                        DateUtils.FORMAT_ABBREV_ALL).toString()
-                        + " by "
-                        + mCursor.getString(ArticleLoader.Query.AUTHOR));
+        holder.titleView.setText(cursor.getString(ArticleLoader.Query.TITLE));
+        String thumb = cursor.getString(ArticleLoader.Query.THUMB_URL);
+        holder.subtitleView.setText(context.getString(R.string.subtitle_by_author, DateUtils.getRelativeTimeSpanString(
+                cursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
+                System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+                DateUtils.FORMAT_ABBREV_ALL).toString(), cursor.getString(ArticleLoader.Query.AUTHOR)));
         Glide.with(context).asBitmap()
                 .load(thumb)
                 .listener(new RequestListener<Bitmap>() {

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -17,7 +16,6 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -25,7 +23,7 @@ import android.widget.TextView;
 import com.adenilson.xyzreader.data.ArticleLoader;
 import com.adenilson.xyzreader.data.UpdaterService;
 import com.adenilson.xyzreader.decoration.GridSpaceItemDecoration;
-import com.adenilson.xyzreader.util.DimensUtil;
+import com.adenilson.xyzreader.util.ConnectionUtil;
 import com.example.xyzreader.R;
 
 import butterknife.BindView;
@@ -64,8 +62,8 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
         GridLayoutManager staggeredGridLayoutManager =
                 new GridLayoutManager(this, columnCount);
         mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(columnCount, DimensUtil.dpToPx(this, 16), true));
-        adapter = new ArticleAdapter(null, this);
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(columnCount, (int)getResources().getDimension(R.dimen.space_item_decoration), true));
+        adapter = new ArticleAdapter(null);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
         getSupportLoaderManager().initLoader(0, null, this);
@@ -132,10 +130,18 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
 
     @Override
     public void onRefresh() {
-        startService(new Intent(this, UpdaterService.class));
-        Snackbar make = Snackbar.make(mCoordinatorLayout, R.string.refreshed_string, Snackbar.LENGTH_LONG);
-        View view = make.getView();
-        ((TextView)view.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        make.show();
+        if(ConnectionUtil.isOnline(this)) {
+            startService(new Intent(this, UpdaterService.class));
+            Snackbar make = Snackbar.make(mCoordinatorLayout, R.string.refreshed_string, Snackbar.LENGTH_LONG);
+            View view = make.getView();
+            ((TextView) view.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            make.show();
+        }else{
+            mSwipeRefreshLayout.setRefreshing(false);
+            Snackbar make = Snackbar.make(mCoordinatorLayout, R.string.offline_string, Snackbar.LENGTH_LONG);
+            View view = make.getView();
+            ((TextView) view.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            make.show();
+        }
     }
 }
